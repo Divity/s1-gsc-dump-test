@@ -84,7 +84,7 @@ bigben2_callbackstartgametype()
     maps\mp\gametypes\_gamelogic::callback_startgametype();
     common_scripts\_bcs_location_trigs_dlc::bcs_location_trigs_dlc_init();
 }
-
+/*
 flickeringlights()
 {
     var_0 = _func_231( "damaged", "targetname" );
@@ -95,7 +95,7 @@ flickeringlights()
     var_4 = _func_231( "destroyed", "targetname" );
 
     foreach ( var_6 in var_4 )
-        var_6 _meth_83F6( 0, 4 );
+        var_6 setlightcolor( 0, 4 );
 }
 
 brokensigns()
@@ -105,6 +105,7 @@ brokensigns()
     foreach ( var_2 in var_0 )
         var_2 _meth_83F6( 0, 1 );
 }
+*/
 
 start_radar_animations()
 {
@@ -115,32 +116,19 @@ start_radar_animations()
     var_4 = getent( "radar_stick_3", "targetname" );
     var_5 = getent( "radar_stick_4", "targetname" );
     var_6 = getent( "radar_stick_5", "targetname" );
-    var_0 _meth_827B( "bbn_radar_dish_01_idle" );
-    var_1 _meth_827B( "bbn_radar_stick_02_idle" );
-    var_2 _meth_827B( "bbn_radar_stick_02_idle" );
+    var_0 scriptmodelplayanimdeltamotion( "bbn_radar_dish_01_idle" );
+    var_1 scriptmodelplayanimdeltamotion( "bbn_radar_stick_02_idle" );
+    var_2 scriptmodelplayanimdeltamotion( "bbn_radar_stick_02_idle" );
     wait 0.3;
-    var_3 _meth_827B( "bbn_radar_stick_02_idle" );
+    var_3 scriptmodelplayanimdeltamotion( "bbn_radar_stick_02_idle" );
     wait 1;
-    var_4 _meth_827B( "bbn_radar_stick_02_idle" );
+    var_4 scriptmodelplayanimdeltamotion( "bbn_radar_stick_02_idle" );
     wait 0.25;
-    var_5 _meth_827B( "bbn_radar_stick_02_idle" );
+    var_5 scriptmodelplayanimdeltamotion( "bbn_radar_stick_02_idle" );
     wait 0.45;
-    var_6 _meth_827B( "bbn_radar_stick_02_idle" );
+    var_6 scriptmodelplayanimdeltamotion( "bbn_radar_stick_02_idle" );
 }
 
-resetuplinkballoutofbounds()
-{
-    level endon( "game_ended" );
-
-    if ( level.gametype == "ball" )
-    {
-        while ( !isdefined( level.balls ) )
-            wait 0.05;
-
-        foreach ( var_1 in level.balls )
-            var_1 thread watchcarryobjects();
-    }
-}
 
 watchcarryobjects()
 {
@@ -155,40 +143,6 @@ watchcarryobjects()
     }
 }
 
-monitorballstate()
-{
-    self endon( "pickup_object" );
-    self endon( "reset" );
-
-    for (;;)
-    {
-        if ( isoutofbounds() )
-        {
-            thread maps\mp\gametypes\_gameobjects::returnhome();
-            return;
-        }
-
-        wait 0.05;
-    }
-}
-
-isoutofbounds()
-{
-    var_0 = getentarray( "object_out_of_bounds", "targetname" );
-
-    for ( var_1 = 0; var_1 < var_0.size; var_1++ )
-    {
-        if ( !self.visuals[0] _meth_80A9( var_0[var_1] ) )
-            continue;
-
-        return 1;
-    }
-
-    if ( self.visuals[0].origin[2] <= 176 )
-        return 1;
-
-    return 0;
-}
 
 fixdroppedbomb()
 {
@@ -708,7 +662,7 @@ issue_16533()
     var_3 = maps\mp\_utility::spawnpatchclip( "patchclip_player_64_64_64", ( 3857, 4413, 756 ), ( 0, 0, 0 ) );
     var_4 = maps\mp\_utility::spawnpatchclip( "patchclip_player_64_64_64", ( 3857, 4349, 756 ), ( 0, 0, 0 ) );
     var_5 = maps\mp\_utility::spawnpatchclip( "patchclip_player_64_64_64", ( 3857, 4285, 756 ), ( 0, 0, 0 ) );
-    var_0 _meth_8568( 0 );
+   /* var_0 _meth_8568( 0 );
     var_0 _meth_856C( 0 );
     var_1 _meth_8568( 0 );
     var_1 _meth_856C( 0 );
@@ -719,7 +673,7 @@ issue_16533()
     var_4 _meth_8568( 0 );
     var_4 _meth_856C( 0 );
     var_5 _meth_8568( 0 );
-    var_5 _meth_856C( 0 );
+    var_5 _meth_856C( 0 ); */
 }
 
 issue_19907()
